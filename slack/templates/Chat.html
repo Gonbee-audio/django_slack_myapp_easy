@@ -1,0 +1,8 @@
+{% extends "Base.html" %}
+
+{% block content %}
+    <p><a href="../ChatSend/">メッセージを送信します</a></p>
+    {% for item in object %}
+    <div>{{ item.text }} <br> name:{{ item.username }} </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "Base.html" %}
+
+{% block content %}
+    <a href="../Login">ログイン</a>
+<form method="POST" action="" >{% csrf_token %}
+{% if error %}{{ error }}{% endif %}
+    <input type="text" name="username">
+    <input type="text" name="password">
+    <input type="submit" value="Sign Up">
+</form>
+{% endblock %}
