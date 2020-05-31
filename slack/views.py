@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from slack.models import ChatMessage
 from slack.forms import PostChatMessage
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 # Create your views here.
 
 def SingUpAccount(request):
@@ -17,6 +19,7 @@ def SingUpAccount(request):
             return render(request, 'Login.html', {})
     return render(request, 'SignUp.html', {})
 
+
 def Login(request):
     if request.method == "POST":
         LoginUsername = request.POST['username']
@@ -29,6 +32,7 @@ def Login(request):
             return render(request, 'Login.html', {})
     return render(request, 'Login.html', {})
 
+@login_required
 def SendChatMessage(request):
     form = PostChatMessage()
     if request.method == 'POST':
@@ -42,7 +46,12 @@ def SendChatMessage(request):
            return render(request, 'redirect', {})
     return render(request, 'ChatSend.html', {'form':form})
 
+@login_required
 def ChatModel(request):
     object = ChatMessage.objects.all()
     return render(request, 'Chat.html', {'object':object}) 
+
+def Logout(request):
+    logout(request)
+    return redirect('login')
 

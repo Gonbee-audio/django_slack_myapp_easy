@@ -1,8 +1,18 @@
 {% extends "Base.html" %}
 
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'SlackCss/Chat.css' %}">
+
+{% endblock %}
+
 {% block content %}
-    <p><a href="../ChatSend/">メッセージを送信します</a></p>
+    <p>
+        <a class="btn btn-primary" href="../ChatSend/">SendMessage</a>
+        <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+    </p>
     {% for item in object %}
-    <div>{{ item.text }} <br> name:{{ item.username }} </div>
+        <div Class="ChatBar">{{ item.text }} <br> name:{{ item.username }} </div>
     {% endfor %}
 {% endblock %}

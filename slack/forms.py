@@ -4,5 +4,5 @@ from .models import ChatMessage
 class PostChatMessage(forms.ModelForm):
     class Meta:
         model = ChatMessage
-        fields = ('username', 'text')
+        fields = ('username','text')
     
