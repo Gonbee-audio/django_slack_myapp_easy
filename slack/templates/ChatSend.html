@@ -9,14 +9,16 @@
 {% block content %}
 <body class="text-center">
     <a class="btn btn-primary" href="../Chat">ChatRoom</a>
-        {% if user.is_authenticated %}
-        <form method="POST">{% csrf_token %}
-            <input type="hidden" name="username" value="{{ user.username }}">
-            <textarea name="text" cols="100" rows="10"></textarea><br>
-            <input type="submit">
-        </form>
-        {% else %}
-        <p>ログインしていません</p>
-        {% endif %}
+        {% if error %}{{ error }}{% endif %}
+            <a>{% if user.is_authenticated %}</a>
+            <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <input type="hidden" name="username" value="{{ user.username }}">
+                <textarea name="text" cols="100" rows="10"></textarea><br>
+                <input type="file" name="image">
+                <input type="submit">
+            </form>
+            {% else %}
+                <p>ログインしていません</p>
+            {% endif %}
 </body>
 {% endblock %}

@@ -13,6 +13,13 @@
         <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
     </p>
     {% for item in object %}
-        <div Class="ChatBar">{{ item.text }} <br> name:{{ item.username }} </div>
+        <div Class="ChatBar">{{ item.text }} <br> name:{{ item.username }}
+        {% if item.image %}<p class="text-center"><img src='{{item.image.url}}' width="200" height="200"/></p>{% endif %}
+            {% if user.is_authenticated %}
+                {% if user.username == item.username %}
+                        <a href="{% url 'delete' item.pk %}" class="btn btn-danger" >Delete</a>
+                {% endif %}
+            {% endif %}
+    </div>
     {% endfor %}
 {% endblock %}
